@@ -18,6 +18,41 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  // console.log("Cookies:", req.cookies);
+  const username = req.cookies.username;
+  res.locals.username = ""; 
+
+  if (username){
+      res.locals.username = username;
+      // console.log(`😍 User's username is ${username}`);
+  }
+  next();
+});
+
+const COOKIE_MAX_AGE = 1000 * 60 * 60 * 24 * 7; // uma semana
+app.post('/sign-in', (req, res) => {
+
+  const username = req.body.username;
+
+  if (username) {
+    res.cookie("username", username, {maxAge: COOKIE_MAX_AGE});
+    res.redirect("/new");
+
+  } else {
+    res.redirect('/');
+  }
+
+});
+
+app.post('/sign-out', (req, res) => {
+  console.log("username");
+  
+  res.clearCookie("username");
+  res.redirect("/");
+});
+
+
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler

@@ -1,0 +1,23 @@
+<%- include("./partials/header") %>
+
+<div style="border: solid 1px gray; padding: 10px">
+  
+  <form  action="/sign-in" method="POST">
+
+    <div>
+
+      <div style="margin-bottom: 10px">
+        <label for="username" style="text-color: grey">Username</label>
+        <input class="form-control mr-sm-2" name="username" placeholder="e.g. Madam Welminster">
+      </div>
+
+      <div>
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Sign In</button>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+
+<%- include("./partials/footer") %>
