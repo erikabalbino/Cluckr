@@ -1,5 +1,7 @@
 
 const express = require('express');
+const knex = require("../db/index");
+
 const router = express.Router();
 
 /* GET home page. */
@@ -13,6 +15,8 @@ router.get('/new', function(req, res, next) {
 
 router.post('/new', (req, res) => {
 
+  
+  
 });
 
 module.exports = router;

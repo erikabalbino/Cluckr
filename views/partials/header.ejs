@@ -29,7 +29,10 @@
                
                 
                 <% if (username){ %>
-                    <button class="btn btn-secondary my-2 my-sm-0" style="margin-right: 5px" type="submit" href="/new">Cluckr!</button>
+                
+                    <form class="form-inline" action="/new" method="GET">
+                        <button class="btn btn-secondary my-2 my-sm-0" style="margin-right: 5px" type="submit">Cluckr!</button>
+                    </form>
 
                     <span class="navbar-text text-dark">
                         <%= username %>
