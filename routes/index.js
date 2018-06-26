@@ -49,4 +49,16 @@ router.get('/index', (req, res) => {
   });
 })
 
+router.get('/clucks', (req, res) => {
+  knex
+  .select("*")
+  .orderBy('createdAt', 'desc')
+  .from("cluckrs")
+  .then(cluckrs => {
+      res.render("index", { allCluckrs: cluckrs });
+      // res.send(cluckrs);
+  });
+})
+
+
 module.exports = router;
