@@ -29,8 +29,8 @@ router.post('/new', (req, res) => {
       .returning("*")
       .then(([cluckr]) => {
           console.log("Cluckrs insert result:", cluckr);
-          res.send(cluckr);
-          // res.redirect(`/index`);
+          // res.send(cluckr);
+          res.redirect(`/index`);
     });
       // res.send(req.body)
   } else {
@@ -39,7 +39,14 @@ router.post('/new', (req, res) => {
 });
 
 router.get('/index', (req, res) => {
-
+  knex
+  .select("*")
+  .orderBy('createdAt', 'desc')
+  .from("cluckrs")
+  .then(cluckrs => {
+      res.render("index", { allCluckrs: cluckrs });
+      // res.send(cluckrs);
+  });
 })
 
 module.exports = router;
