@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Express Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+
+        <script src="/javascripts/jquery-3.3.1.slim.min.js"></script>
+        <script src="/javascripts/popper.min.js"></script>
+        <script src="/javascripts/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-sm  navbar-light bg-white mb-4" style="border-bottom: solid 1px gray">
+        <a class="navbar-brand" href="/index"> 
+            <img style="max-width:65px; margin-top: 5px;" 
+            src="/images/cluckr.jpg"  alt="">
+        </a>
+
+        <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse topnav justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+               
+                
+                <% if (username){ %>
+                
+                    <form class="form-inline" action="/new" method="GET">
+                        <button class="btn btn-secondary my-2 my-sm-0" style="margin-right: 5px" type="submit">Cluckr !</button>
+                    </form>
+
+                    <span class="navbar-text text-dark">
+                        Hi <%= username %> !
+                    </span>
+                    
+                    <form class="form-inline" action="/sign-out" method="POST">
+                        <button class="btn btn-secondary my-2 my-sm-0" style="margin-left: 5px" type="submit">Sign Out</button>
+                    </form>
+                
+                <% } else { %>
+                
+                    <form class="form-inline" action="/sign-in" method="POST">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit" >Sign In</button>
+                    </form>
+      
+              <% } %>
+
+            </div>
+        </div>
+
+  
+    </nav>
+
+    <div class="container-fluid" style="max-width = 576px">

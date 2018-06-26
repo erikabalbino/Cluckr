@@ -1,11 +1,41 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<%- include("./partials/header") %>
+
+  
+<div class="container">
+
+    <% for (let cluckr of allCluckrs) { %>
+    
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <div class="row" style="flex-wrap: nowrap;">
+                    <div class="col-sm-2" style="padding: 0px">
+                        <span class="">
+                            <img src="/images/cluckr_avatar.jpg"
+                            style="max-width:100px; max-height:100px; margin-top: 5 px;" 
+                            alt="logo" class="rounded-circle">
+                        </span>
+                    </div>
+                    <div class="col-sm-10">
+                        <h5 class="card-title mb-2">
+                            <%= cluckr.username%>
+                            •
+                            <%= cluckr.createdAt %>
+                        </h5>
+                        <p class="card-text text-secondary mb-2"><%= cluckr.content %></p>
+                        <% if (cluckr.image_Url) { %>
+                            <img class="card-img img-thumbnail" src="<%= cluckr.image_Url %>" 
+                                alt="Card img"
+                            >
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    <% } %>
+
+
+</div>
+
+<%- include("./partials/footer") %>

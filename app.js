@@ -1,13 +1,12 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,8 +18,42 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  // console.log("Cookies:", req.cookies);
+  const username = req.cookies.username;
+  res.locals.username = ""; 
+
+  if (username){
+      res.locals.username = username;
+      // console.log(`😍 User's username is ${username}`);
+  }
+  next();
+});
+
+const COOKIE_MAX_AGE = 1000 * 60 * 60 * 24 * 7; // uma semana
+app.post('/sign-in', (req, res) => {
+
+  const username = req.body.username;
+
+  if (username) {
+    res.cookie("username", username, {maxAge: COOKIE_MAX_AGE});
+    res.redirect("/new");
+
+  } else {
+    res.redirect('/');
+  }
+
+});
+
+app.post('/sign-out', (req, res) => {
+  console.log("username");
+  
+  res.clearCookie("username");
+  res.redirect("/");
+});
+
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
