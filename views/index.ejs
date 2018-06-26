@@ -4,8 +4,7 @@
 <div class="container">
 
     <% for (let cluckr of allCluckrs) { %>
-
-        
+    
         <div class="card mb-4">
 
             <div class="card-body">
@@ -22,12 +21,11 @@
                             <%= cluckr.username%>
                             •
                             <%= cluckr.createdAt %>
-                        </h4>
+                        </h5>
                         <p class="card-text text-secondary mb-2"><%= cluckr.content %></p>
                         <% if (cluckr.image_Url) { %>
                             <img class="card-img img-thumbnail" src="<%= cluckr.image_Url %>" 
                                 alt="Card img"
-                                
                             >
                         <% } %>
                     </div>
